@@ -1,6 +1,6 @@
 # Detection des debordements des bassins de laverie par IA
 
-![image de la laverie OCP Plant Wash](IMGs\img9.jpeg)
+![image de la laverie OCP Plant Wash](readme_img.jpeg)
 
 ## Sujet du projet
 
@@ -332,15 +332,15 @@ Alerte ou decision finale
 
 ## Comparaison attendue des approches
 
-| Approche | Donnees necessaires | Precision attendue | Robustesse | Complexite | Utilite pour le projet |
-|---|---|---:|---:|---:|---|
-| Seuillage couleur | Aucune annotation | Faible a moyenne | Faible | Faible | Baseline |
-| Traitement d'image classique | Peu de donnees | Moyenne | Faible a moyenne | Faible | Baseline avancee |
-| Machine Learning classique | Donnees annotees ou caracteristiques | Moyenne | Moyenne | Moyenne | Comparaison |
-| CNN classification | Labels image | Moyenne a bonne | Bonne | Moyenne | Detection globale |
-| Segmentation U-Net | Masques de segmentation | Bonne | Bonne | Moyenne | Approche principale |
-| DeepLabV3+ / SegFormer | Masques de segmentation | Tres bonne | Tres bonne | Elevee | Approche avancee |
-| YOLO-seg | Masques de segmentation | Bonne | Bonne | Moyenne | Temps reel |
+| Approche                     | Donnees necessaires                  | Precision attendue |       Robustesse | Complexite | Utilite pour le projet |
+| ---------------------------- | ------------------------------------ | -----------------: | ---------------: | ---------: | ---------------------- |
+| Seuillage couleur            | Aucune annotation                    |   Faible a moyenne |           Faible |     Faible | Baseline               |
+| Traitement d'image classique | Peu de donnees                       |            Moyenne | Faible a moyenne |     Faible | Baseline avancee       |
+| Machine Learning classique   | Donnees annotees ou caracteristiques |            Moyenne |          Moyenne |    Moyenne | Comparaison            |
+| CNN classification           | Labels image                         |    Moyenne a bonne |            Bonne |    Moyenne | Detection globale      |
+| Segmentation U-Net           | Masques de segmentation              |              Bonne |            Bonne |    Moyenne | Approche principale    |
+| DeepLabV3+ / SegFormer       | Masques de segmentation              |         Tres bonne |       Tres bonne |     Elevee | Approche avancee       |
+| YOLO-seg                     | Masques de segmentation              |              Bonne |            Bonne |    Moyenne | Temps reel             |
 
 ## Conclusion
 
