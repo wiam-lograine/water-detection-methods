@@ -1,0 +1,12 @@
+[project]
+name = "water-detection-methods"
+version = "0.1.0"
+description = "Ce projet a pour objectif de developper un systeme intelligent capable de detecter l'eau dans des images issues de cameras"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "matplotlib>=3.11.0",
+    "numpy>=2.5.1",
+    "pillow>=12.3.0",
+    "tensorflow>=2.21.0",
+]
