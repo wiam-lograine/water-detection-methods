@@ -175,6 +175,7 @@ Les notebooks seront utilises pour les experimentations, avec un notebook par ap
 
 Les fonctions communes seront placees dans `src/water_detection_methods` :
 
+- `baselines.py` : methodes simples de detection, dont le seuillage par dominance du bleu ;
 - `data.py` : chargement des images, des masques et creation des paires image/annotation ;
 - `visualization.py` : affichage des images, masques et overlays ;
 - `metrics.py` : metriques de segmentation comme IoU, Dice coefficient et accuracy pixel ;
@@ -184,6 +185,20 @@ Les fonctions communes seront placees dans `src/water_detection_methods` :
 Cette organisation evite de dupliquer le meme code dans tous les notebooks et facilite la comparaison des approches.
 
 Pour executer les notebooks, il faut selectionner l'environnement Python du projet (`.venv`). Les helpers ont ete verifies avec cet environnement et detectent actuellement 2400 paires image/masque dans `water_v2` et 10 images locales dans `IMGs`.
+
+Une premiere interface graphique est disponible dans `apps/threshold_gui.py`. Elle permet de choisir une image, d'appliquer la baseline de seuillage, puis d'afficher l'image originale, le masque et l'overlay.
+
+Commande d'execution :
+
+```bash
+python apps/threshold_gui.py
+```
+
+Si l'environnement virtuel est utilise sous Windows :
+
+```bash
+.venv\Scripts\python.exe apps\threshold_gui.py
+```
 
 ### Etape 1 : Exploration des donnees
 
