@@ -84,7 +84,7 @@ def load_image(path, size=None):
     if size is not None:
         # Bilinear interpolation is appropriate for natural images because it
         # gives smoother resized images than nearest-neighbor interpolation.
-        image = image.resize(size, Image.BILINEAR)
+        image = image.resize(size, resample=Image.Resampling.BILINEAR)
     return np.asarray(image, dtype=np.float32) / 255.0
 
 
@@ -102,7 +102,7 @@ def load_mask(path, size=None, threshold=0):
     if size is not None:
         # Nearest-neighbor interpolation preserves class labels. Bilinear
         # interpolation would create artificial gray values between classes.
-        mask = mask.resize(size, Image.NEAREST)
+        mask = mask.resize(size, Image.Resampling.NEAREST)
     mask_array = np.asarray(mask)
     return (mask_array > threshold).astype(np.uint8)
 
