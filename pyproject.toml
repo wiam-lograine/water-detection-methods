@@ -5,6 +5,8 @@ description = "Ce projet a pour objectif de developper un systeme intelligent ca
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
+    "ipykernel>=7.3.0",
+    "keras>=3.15.0",
     "matplotlib>=3.11.0",
     "numpy>=2.5.1",
     "pillow>=12.3.0",
