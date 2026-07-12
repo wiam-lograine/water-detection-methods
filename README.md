@@ -1,6 +1,6 @@
 # Detection des debordements des bassins de laverie par IA
 
-![image de la laverie OCP Plant Wash](readme_img.jpeg)
+![image de la laverie OCP Plant Wash](assets/cover.jpeg)
 
 ## Sujet du projet
 
@@ -323,42 +323,52 @@ Le systeme final devra produire :
 
 ## Architecture generale du systeme
 
-```text
-Image camera
-    |
-    v
-Pretraitement
-    |
-    v
-Modele de detection / segmentation de l'eau
-    |
-    v
-Masque eau / non-eau
-    |
-    v
-Analyse de la zone critique
-    |
-    v
-Score de confiance du debordement
-    |
-    v
-Alerte ou decision finale
-```
-
-## Comparaison attendue des approches
-
-| Approche                     | Donnees necessaires                  | Precision attendue |       Robustesse | Complexite | Utilite pour le projet |
-| ---------------------------- | ------------------------------------ | -----------------: | ---------------: | ---------: | ---------------------- |
-| Seuillage couleur            | Aucune annotation                    |   Faible a moyenne |           Faible |     Faible | Baseline               |
-| Traitement d'image classique | Peu de donnees                       |            Moyenne | Faible a moyenne |     Faible | Baseline avancee       |
-| Machine Learning classique   | Donnees annotees ou caracteristiques |            Moyenne |          Moyenne |    Moyenne | Comparaison            |
-| CNN classification           | Labels image                         |    Moyenne a bonne |            Bonne |    Moyenne | Detection globale      |
-| Segmentation U-Net           | Masques de segmentation              |              Bonne |            Bonne |    Moyenne | Approche principale    |
-| DeepLabV3+ / SegFormer       | Masques de segmentation              |         Tres bonne |       Tres bonne |     Elevee | Approche avancee       |
-| YOLO-seg                     | Masques de segmentation              |              Bonne |            Bonne |    Moyenne | Temps reel             |
+![Architecture generale du systeme](assets/architecture.png)
 
 ## Conclusion
 
 La solution la plus adaptee au projet est d'utiliser une approche de segmentation semantique pour detecter l'eau dans les images. Le dataset `water_v2` servira a entrainer un premier modele, puis les images locales de la laverie dans `IMGs` permettront de tester la generalisation du modele dans l'environnement reel.
 
 Le systeme ne se limitera pas a dire s'il y a de l'eau ou non. Il devra aussi analyser la position de l'eau par rapport aux zones critiques des bassins afin d'estimer un pourcentage de confiance lie au risque de debordement.
+
+```
+water-detection-methods
+├─ .python-version
+├─ apps
+│  └─ threshold_gui.py
+├─ image-1.png
+├─ image.png
+├─ IMGs
+│  ├─ img1.jpeg
+│  ├─ img10.jpeg
+│  ├─ img2.jpeg
+│  ├─ img3.jpeg
+│  ├─ img4.jpeg
+│  ├─ img5.jpeg
+│  ├─ img6.jpeg
+│  ├─ img7.jpeg
+│  ├─ img8.jpeg
+│  └─ img9.jpeg
+├─ main.py
+├─ notebook.ipynb
+├─ notebooks
+│  ├─ 00_exploration_dataset.ipynb
+│  ├─ 01_baseline_seuillage.ipynb
+│  ├─ 02_ml_classique.ipynb
+│  ├─ 03_deep_learning_unet.ipynb
+│  └─ 04_test_laverie_overflow.ipynb
+├─ pyproject.toml
+├─ README.md
+├─ readme_img.jpeg
+├─ src
+│  └─ water_detection_methods
+│     ├─ baselines.py
+│     ├─ data.py
+│     ├─ metrics.py
+│     ├─ overflow.py
+│     ├─ paths.py
+│     ├─ visualization.py
+│     └─ __init__.py
+└─ uv.lock
+
+```
