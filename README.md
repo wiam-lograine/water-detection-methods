@@ -331,13 +331,15 @@ La solution la plus adaptee au projet est d'utiliser une approche de segmentatio
 
 Le systeme ne se limitera pas a dire s'il y a de l'eau ou non. Il devra aussi analyser la position de l'eau par rapport aux zones critiques des bassins afin d'estimer un pourcentage de confiance lie au risque de debordement.
 
+
 ```
 water-detection-methods
 ├─ .python-version
 ├─ apps
 │  └─ threshold_gui.py
-├─ image-1.png
-├─ image.png
+├─ assets
+│  ├─ architecture.png
+│  └─ cover.jpeg
 ├─ IMGs
 │  ├─ img1.jpeg
 │  ├─ img10.jpeg
@@ -360,6 +362,7 @@ water-detection-methods
 ├─ pyproject.toml
 ├─ README.md
 ├─ readme_img.jpeg
+├─ requirements.txt
 ├─ src
 │  └─ water_detection_methods
 │     ├─ baselines.py
@@ -369,6 +372,7 @@ water-detection-methods
 │     ├─ paths.py
 │     ├─ visualization.py
 │     └─ __init__.py
+├─ tree.txt
 └─ uv.lock
 
 ```
