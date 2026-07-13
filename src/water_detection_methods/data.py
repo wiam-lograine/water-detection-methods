@@ -107,7 +107,7 @@ def load_mask(path, size=None, threshold=0):
     return (mask_array > threshold).astype(np.uint8)
 
 
-def load_pair(image_path, mask_path, size=None):
+def load_pair(image_path, mask_path, size=None) -> tuple[np.ndarray, np.ndarray]:
     """Load an image and its binary mask.
 
     This helper keeps notebooks short and guarantees that image and mask are
