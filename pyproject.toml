@@ -14,4 +14,13 @@ dependencies = [
     "pillow>=12.3.0",
     "scikit-learn>=1.9.0",
     "tensorflow>=2.21.0",
+    "torch>=2.7.0",
 ]
+
+[tool.uv.sources]
+torch = { index = "pytorch-cu126" }
+
+[[tool.uv.index]]
+name = "pytorch-cu126"
+url = "https://download.pytorch.org/whl/cu126"
+explicit = true
