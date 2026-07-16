@@ -1,14 +1,18 @@
 import numpy as np
+from typing import Union
 
 
-def binarize(mask, threshold=0.5):
-    """Convert probabilities or grayscale masks to binary masks.
+def binarize(mask: Union[list, np.ndarray], threshold: float = 0.5) -> np.ndarray:
+    """Convert probabilities or grayscale masks to binary masks."""
+    # 1. Convert input to a numpy array (if it isn't already)
+    arr = np.asarray(mask)
 
-    `threshold=0.5` is the standard decision threshold for probability maps:
-    pixels with probability >= 50% are considered water. For already-binary
-    masks with values 0 and 1, this keeps the mask unchanged.
-    """
-    return (np.asarray(mask) >= threshold).astype(np.uint8)
+    # 2. Safety check: Make sure the threshold is actually a valid percentage
+    if not (0.0 <= threshold <= 1.0):
+        raise ValueError("Threshold must be between 0.0 and 1.0.")
+    
+    # 3. The core logic
+    return (arr >= threshold).astype(np.uint8)
 
 
 def intersection_over_union(y_true, y_pred, threshold=0.5, eps=1e-7):
