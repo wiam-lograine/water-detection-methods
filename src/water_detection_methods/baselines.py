@@ -1,13 +1,17 @@
 import numpy as np
+from typing import Any, TypeAlias
+import numpy.typing as npt
 
+
+FloatImage: TypeAlias = npt.NDArray[np.floating[Any]]
 
 def blue_dominance_threshold(
-    image,
-    blue_min=0.18,
-    blue_red_ratio=1.05,
-    blue_green_ratio=0.85,
-    brightness_min=0.05,
-):
+    image: FloatImage,
+    blue_min: float=0.18,
+    blue_red_ratio: float=1.05,
+    blue_green_ratio: float =0.85,
+    brightness_min: float =0.05,
+) -> npt.NDArray[np.uint8]:
     """Segment water with a simple blue-channel dominance rule.
 
     The input image is expected to be RGB and normalized in [0, 1], as returned
