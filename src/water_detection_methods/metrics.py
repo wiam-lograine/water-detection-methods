@@ -15,7 +15,12 @@ def binarize(mask: Union[list, np.ndarray], threshold: float = 0.5) -> np.ndarra
     return (arr >= threshold).astype(np.uint8)
 
 
-def intersection_over_union(y_true: Union[list, np.ndarray], y_pred: Union[list, np.ndarray], threshold: float = 0.5, eps: float = 1e-7) -> float:
+def intersection_over_union(
+    y_true: Union[list, np.ndarray],
+    y_pred: Union[list, np.ndarray], 
+    threshold: float = 0.5,
+    eps: float = 1e-7
+    ) -> float:
     """Compute IoU for binary segmentation.
 
     IoU = intersection / union. It is strict: false positives and false
