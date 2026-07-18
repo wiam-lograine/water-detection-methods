@@ -1,7 +1,14 @@
 import numpy as np
+from typing import Union
 
 
-def rectangular_zone(mask_shape, x_min=0.0, y_min=0.0, x_max=1.0, y_max=1.0):
+def rectangular_zone(
+    mask_shape: Union[list, np.ndarray, tuple[int, int]],
+    x_min: float = 0.0,
+    y_min: float = 0.0,
+    x_max: float = 1.0,
+    y_max: float = 1.0,
+) -> np.ndarray:
     """Create a binary zone mask from relative coordinates.
 
     Coordinates are relative values in [0, 1], not pixels. This makes the zone
@@ -22,7 +29,7 @@ def rectangular_zone(mask_shape, x_min=0.0, y_min=0.0, x_max=1.0, y_max=1.0):
     return zone
 
 
-def water_ratio_in_zone(water_mask, zone_mask):
+def water_ratio_in_zone(water_mask: Union[list, np.ndarray], zone_mask: Union[list, np.ndarray]) -> float:
     """Return the ratio of zone pixels predicted as water.
 
     A value of 0.0 means no detected water in the critical zone. A value of 1.0
@@ -38,7 +45,9 @@ def water_ratio_in_zone(water_mask, zone_mask):
     return float(np.logical_and(water_mask, zone_mask).sum() / zone_size)
 
 
-def overflow_confidence(water_mask, zone_mask, alert_ratio=0.15):
+def overflow_confidence(
+    water_mask: Union[list, np.ndarray], zone_mask: Union[list, np.ndarray], alert_ratio: float = 0.15
+) -> dict[str, float]:
     """Estimate overflow confidence from water presence in a critical zone.
 
     `alert_ratio=0.15` means that if at least 15% of the critical zone is
@@ -58,7 +67,7 @@ def overflow_confidence(water_mask, zone_mask, alert_ratio=0.15):
     }
 
 
-def overflow_label(confidence, low=0.3, high=0.7):
+def overflow_label(confidence: float, low: float = 0.3, high: float = 0.7) -> str:
     """Convert a confidence score to a readable decision.
 
     Default thresholds:

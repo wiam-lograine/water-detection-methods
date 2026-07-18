@@ -1,13 +1,14 @@
 import numpy as np
+from typing import Union
 
 
 def blue_dominance_threshold(
-    image,
-    blue_min=0.18,
-    blue_red_ratio=1.05,
-    blue_green_ratio=0.85,
-    brightness_min=0.05,
-):
+    image: Union[list, np.ndarray],
+    blue_min: float = 0.18,
+    blue_red_ratio: float = 1.05,
+    blue_green_ratio: float = 0.85,
+    brightness_min: float = 0.05,
+) -> np.ndarray:
     """Segment water with a simple blue-channel dominance rule.
 
     The input image is expected to be RGB and normalized in [0, 1], as returned
@@ -34,13 +35,13 @@ def blue_dominance_threshold(
     These values are starting points for the baseline interface. They should be
     tuned on the real laverie images and compared with annotated masks.
     """
-    image = np.asarray(image, dtype=np.float32)
+    img_arr: np.ndarray = np.asarray(image, dtype=np.float32)
 
     # Split channels to make the rule explicit and easy to discuss in reports.
-    red = image[:, :, 0]
-    green = image[:, :, 1]
-    blue = image[:, :, 2]
-    brightness = image.mean(axis=2)
+    red = img_arr[:, :, 0]
+    green = img_arr[:, :, 1]
+    blue = img_arr[:, :, 2]
+    brightness = img_arr.mean(axis=2)
 
     # A pixel is selected as water only if it satisfies all simple conditions.
     mask = (
@@ -52,7 +53,7 @@ def blue_dominance_threshold(
     return mask.astype(np.uint8)
 
 
-def mask_coverage(mask):
+def mask_coverage(mask: Union[list, np.ndarray]) -> float:
     """Return the percentage of pixels selected by a binary mask.
 
     This is useful for quick interpretation in the GUI: if coverage is very

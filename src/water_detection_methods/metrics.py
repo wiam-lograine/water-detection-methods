@@ -1,5 +1,5 @@
 import numpy as np
-from typing import Union
+from typing import Union, Any
 
 
 def binarize(mask: Union[list, np.ndarray], threshold: float = 0.5) -> np.ndarray:
@@ -15,7 +15,7 @@ def binarize(mask: Union[list, np.ndarray], threshold: float = 0.5) -> np.ndarra
     return (arr >= threshold).astype(np.uint8)
 
 
-def intersection_over_union(y_true, y_pred, threshold=0.5, eps=1e-7):
+def intersection_over_union(y_true: Union[list, np.ndarray], y_pred: Union[list, np.ndarray], threshold: float = 0.5, eps: float = 1e-7) -> float:
     """Compute IoU for binary segmentation.
 
     IoU = intersection / union. It is strict: false positives and false
@@ -29,7 +29,7 @@ def intersection_over_union(y_true, y_pred, threshold=0.5, eps=1e-7):
     return float((intersection + eps) / (union + eps))
 
 
-def dice_coefficient(y_true, y_pred, threshold=0.5, eps=1e-7):
+def dice_coefficient(y_true: np.ndarray, y_pred:np.ndarray, threshold: float = 0.5, eps: float = 1e-7) -> float:
     """Compute Dice coefficient for binary segmentation.
 
     Dice = 2 * intersection / (size_true + size_pred). It is often used in
@@ -43,7 +43,7 @@ def dice_coefficient(y_true, y_pred, threshold=0.5, eps=1e-7):
     return float((2 * intersection + eps) / (total + eps))
 
 
-def pixel_accuracy(y_true, y_pred, threshold=0.5):
+def pixel_accuracy(y_true: Union[list, np.ndarray], y_pred: Union[list, np.ndarray], threshold: float = 0.5) -> float:
     """Compute pixel-wise accuracy.
 
     This metric counts the percentage of correctly classified pixels. It is
