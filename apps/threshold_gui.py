@@ -28,9 +28,9 @@ def mask_to_pil(mask):
 
 
 def fit_on_panel(image, size=PANEL_SIZE):
-    panel = Image.new("RGB", size, (245, 247, 250))
-    preview = image.copy()
-    preview.thumbnail(size, Image.LANCZOS)
+    panel: Image.Image = Image.new("RGB", size, (245, 247, 250))
+    preview: Image.Image = image.copy()
+    preview.thumbnail(size, Image.Resampling.LANCZOS)
     x = (size[0] - preview.width) // 2
     y = (size[1] - preview.height) // 2
     panel.paste(preview, (x, y))

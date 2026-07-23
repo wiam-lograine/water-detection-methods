@@ -256,6 +256,14 @@ def _detect_format(state_dict: dict[str, torch.Tensor]) -> Literal["smp", "custo
     raise ValueError("Cannot detect model architecture from state dict keys.")
 
 
+def _strip_compile_prefix(state_dict: dict[str, torch.Tensor]) -> dict[str, torch.Tensor]:
+    """Strip ``_orig_mod.`` prefix added by ``torch.compile()``."""
+    prefix = "_orig_mod."
+    if any(k.startswith(prefix) for k in state_dict):
+        return {k[len(prefix):]: v for k, v in state_dict.items()}
+    return state_dict
+
+
 def _extract_image_size(cfg: Any) -> tuple[int, int]:
     if isinstance(cfg, dict):
         raw = cfg.get("image_size", (512, 512))
@@ -316,7 +324,8 @@ def load_checkpoint(
         encoder_name = checkpoint.get("encoder_name", "resnet18")
         cfg = checkpoint.get("config", {})
         model = build_smp_model(arch, encoder_name=encoder_name, pretrained=False)
-        model.load_state_dict(checkpoint["state_dict"])
+        state_dict = _strip_compile_prefix(checkpoint["state_dict"])
+        model.load_state_dict(state_dict)
         model.eval()
         return {
             "model": model,
@@ -328,7 +337,7 @@ def load_checkpoint(
     # --- 2. Checkpoints with model_state_dict ---
     if "model_state_dict" in checkpoint:
         cfg = checkpoint.get("config", {})
-        state_dict = checkpoint["model_state_dict"]
+        state_dict = _strip_compile_prefix(checkpoint["model_state_dict"])
         fmt = _detect_format(state_dict)
 
         if fmt == "smp":
